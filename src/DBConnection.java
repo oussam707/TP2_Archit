@@ -8,15 +8,22 @@ public class DBConnection {
 		String url = "jdbc:mysql://localhost:3306/" + BDD;
 		String user = "root";
 		String passwd = "";
-	    private Connection conn;
+	    private static Connection conn;
+	     {
+	        
+	        try {
+	            
+	            Class.forName("com.mysql.jdbc.Driver");
 
-	   
-	    public DBConnection() throws SQLException {
 			conn=DriverManager.getConnection(url, user,passwd);
+	        } catch (ClassNotFoundException | SQLException e) {
+	            throw new RuntimeException("not connected " ,e);
+	        }
+	    
 		}
 
 	    
-	    public Connection getConn() {
+	    public static Connection getConn() {
 			return conn;
 		}
 
