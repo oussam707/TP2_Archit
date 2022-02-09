@@ -2,30 +2,33 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnection {
+public class DBConnection implements InterfaceDBConnexion {
 	   
 		String BDD = "nomBD";
 		String url = "jdbc:mysql://localhost:3306/" + BDD;
 		String user = "root";
 		String passwd = "";
 	    private static Connection conn;
-	     {
-	        
-	        try {
-	            
-	            Class.forName("com.mysql.jdbc.Driver");
-
-			conn=DriverManager.getConnection(url, user,passwd);
-	        } catch (ClassNotFoundException | SQLException e) {
-	            throw new RuntimeException("not connected " ,e);
-	        }
+	    private static DBConnection db;
 	    
-		}
+		   
+		   private DBConnection() {
+				}
+		   
+		   public static DBConnection getInstance(){
+				if(db == null){
+					db = new DBConnection();
+					System.out.println("nouveau");
+				}else{
+					System.out.println("existe deja");
 
-	    
-	    public static Connection getConn() {
-			return conn;
-		}
+				}
+				return db;
+			}
+			
+		    public Connection getConn() {
+				return conn;
+			}
 
 
 		
