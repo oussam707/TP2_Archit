@@ -10,6 +10,16 @@ public class EtudiantService implements InterfaceEtudiantService {
 	  private InterfaceUniversiteRepository UnivRep;
 	  
 	
+	  public  void ajouterbonus(InterfaceEtudiant Et) {
+		    
+		    InterfaceUniversity univ = UnivRep.GetById(Et.getId_universite());
+			
+		    Package p = new Standard(null);
+			Et.bonus(p.getNbrLivreBonus());
+		 }
+	  
+	  
+	  
 	boolean inscription (Etudiant etud , int ID_univ ) throws SQLException	
 	    {
         Universite univ = UnivRep.GetById(ID_univ) ;
