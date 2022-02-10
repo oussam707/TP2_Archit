@@ -4,8 +4,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class EtudiantRepository {
+public class EtudiantRepository implements InterfaceEtudiantRepository {
+	private InterfaceDBConnexion BDD ;
+	private static Statement stmt;
+	private Ijournal j;
 	
+	public EtudiantRepository(InterfaceDBConnexion BDD, Ijournal j){
+		this.BDD = BDD;
+		this.j = j ;
+		}
 	
 	void add(Etudiant E) throws SQLException
 	{
